@@ -1,3 +1,5 @@
+import TestColors from "./test-colors";
+
 export default function Home() {
-  return <p>oi</p>;
+  return <TestColors />;
 }

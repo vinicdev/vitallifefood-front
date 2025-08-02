@@ -1,0 +1,73 @@
+/* Classes de cores personalizadas */
+.bg-creme {
+  background-color: var(--color-creme) !important;
+}
+.bg-marrom {
+  background-color: var(--color-marrom) !important;
+}
+.bg-verde {
+  background-color: var(--color-verde) !important;
+}
+.bg-branco {
+  background-color: var(--color-branco) !important;
+}
+.bg-verde-claro {
+  background-color: var(--color-verde-claro) !important;
+}
+
+.text-creme {
+  color: var(--color-creme) !important;
+}
+.text-marrom {
+  color: var(--color-marrom) !important;
+}
+.text-verde {
+  color: var(--color-verde) !important;
+}
+.text-branco {
+  color: var(--color-branco) !important;
+}
+.text-verde-claro {
+  color: var(--color-verde-claro) !important;
+}
+
+.border-creme {
+  border-color: var(--color-creme) !important;
+}
+.border-marrom {
+  border-color: var(--color-marrom) !important;
+}
+.border-verde {
+  border-color: var(--color-verde) !important;
+}
+.border-branco {
+  border-color: var(--color-branco) !important;
+}
+.border-verde-claro {
+  border-color: var(--color-verde-claro) !important;
+}
+
+/* Classes para botões */
+.btn-primary {
+  background-color: var(--color-verde) !important;
+  color: var(--color-branco) !important;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #4a7a4d !important;
+  transform: translateY(-1px);
+}
+
+/* Classes para cards */
+.card {
+  background-color: var(--color-branco) !important;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}

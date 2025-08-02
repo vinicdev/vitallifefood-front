@@ -1,26 +1,30 @@
 @import "tailwindcss";
+@import "./custom-colors.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Paleta de cores personalizada */
+  --color-creme: #f5efe1; /* Fundo do site */
+  --color-marrom: #4a4a4a; /* Corpo de texto */
+  --color-verde: #5e8c61; /* Botões e destaques */
+  --color-branco: #ffffff; /* Fundo de cards de produto */
+  --color-verde-claro: #b3c6a7; /* Detalhes e ícones */
+  --color-vermelho: #d32f2f;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
+  --color-background: #f5efe1;
+  --color-foreground: #4a4a4a;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background-color: var(--color-creme) !important;
+  color: var(--color-marrom);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+html {
+  background-color: var(--color-creme);
 }
