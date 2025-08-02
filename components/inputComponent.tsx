@@ -18,7 +18,6 @@ export default function InputComponent({
   hasError,
   value,
 }: InputComponentProps) {
-  console.log(`Input ${label} - value:`, value);
   return (
     <TextField
       id="outlined-basic"
@@ -29,7 +28,6 @@ export default function InputComponent({
       className="w-full"
       value={value || ""}
       onChange={(e) => {
-        console.log("Input onChange:", e.target.value);
         onChange?.(e.target.value);
       }}
       InputLabelProps={{
