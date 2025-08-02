@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export const useServerAuth = () => {
-  const cookieStore = cookies();
+export const useServerAuth = async () => {
+  const cookieStore = await cookies();
 
   const getAccessToken = () => {
     return cookieStore.get("accessToken")?.value;

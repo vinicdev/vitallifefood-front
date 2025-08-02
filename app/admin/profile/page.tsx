@@ -1,8 +1,8 @@
 import { useServerAuth } from "@/hooks/useServerAuth";
 
-export default function AdminProfile() {
+export default async function AdminProfile() {
   // Verificar autenticação no lado do servidor
-  const { requireAuth } = useServerAuth();
+  const { requireAuth } = await useServerAuth();
   requireAuth(); // Redireciona para login se não estiver autenticado
 
   return (
