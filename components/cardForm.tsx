@@ -45,10 +45,8 @@ export default function CardForm({
     }
 
     if (isRegister) {
-      onRegisterSuccess?.({
-        email: formData.email,
-        password: formData.password,
-      });
+      const { confirmPassword, ...registrationData } = formData;
+      onRegisterSuccess?.(registrationData);
     } else {
       onSubmit({
         email: formData.email,

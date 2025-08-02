@@ -3,7 +3,7 @@ import { authService, tokenService } from "@/services/api";
 import { LoginCredentials, RegisterData, AuthResponse } from "@/types/api";
 
 export const useAuth = () => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<AuthResponse["user"] | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -36,18 +36,27 @@ export const useAuth = () => {
         console.error("Login falhou:", response.message);
         return { success: false, message: response.message };
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Erro no login (catch):", error);
-      console.error("Detalhes do erro:", {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status,
-      });
+
+      let errorMessage = "Erro no login";
+      if (error && typeof error === "object") {
+        const errorObj = error as any;
+        console.error("Detalhes do erro:", {
+          message: errorObj.message,
+          response: errorObj.response?.data,
+          status: errorObj.response?.status,
+        });
+
+        errorMessage =
+          errorObj.response?.data?.message ||
+          errorObj.message ||
+          "Erro no login";
+      }
 
       return {
         success: false,
-        message:
-          error.response?.data?.message || error.message || "Erro no login",
+        message: errorMessage,
       };
     }
   };
@@ -62,10 +71,16 @@ export const useAuth = () => {
       } else {
         return { success: false, message: response.message };
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      let errorMessage = "Erro no registro";
+      if (error && typeof error === "object") {
+        const errorObj = error as any;
+        errorMessage = errorObj.response?.data?.message || "Erro no registro";
+      }
+
       return {
         success: false,
-        message: error.response?.data?.message || "Erro no registro",
+        message: errorMessage,
       };
     }
   };
@@ -86,11 +101,19 @@ export const useAuth = () => {
       } else {
         return { success: false, message: response.message };
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       logout(); // Se não conseguir renovar, fazer logout
+
+      let errorMessage = "Erro ao renovar token";
+      if (error && typeof error === "object") {
+        const errorObj = error as any;
+        errorMessage =
+          errorObj.response?.data?.message || "Erro ao renovar token";
+      }
+
       return {
         success: false,
-        message: error.response?.data?.message || "Erro ao renovar token",
+        message: errorMessage,
       };
     }
   };

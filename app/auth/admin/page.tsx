@@ -33,7 +33,7 @@ export default function Admin() {
         console.error("Login admin falhou:", result.message);
         setError(result.message || "Erro no login");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Erro no login admin:", error);
       setError("Erro interno do servidor");
     } finally {

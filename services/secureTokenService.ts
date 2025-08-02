@@ -12,18 +12,12 @@ export const secureTokenService = {
     });
 
     document.cookie = cookieString;
-
-    // Verificar se o cookie foi criado
-    setTimeout(() => {
-      const savedToken = secureTokenService.getAccessToken();
-      console.log("Cookie accessToken criado:", !!savedToken);
-    }, 100);
   },
 
   // Salvar refresh token como cookie seguro
   setRefreshToken: (token: string, expiresIn: number) => {
     const expiresAt = new Date(Date.now() + expiresIn * 1000);
-    const cookieString = `refreshToken=${token}; expires=${expiresAt.toUTCString()}; path=/; secure; samesite=strict`;
+    const cookieString = `refreshToken=${token}; expires=${expiresAt.toUTCString()}; path=/; secure; samesite=strict; httponly`;
 
     console.log("Criando cookie refreshToken:", {
       token: token.substring(0, 20) + "...",
@@ -31,12 +25,6 @@ export const secureTokenService = {
     });
 
     document.cookie = cookieString;
-
-    // Verificar se o cookie foi criado
-    setTimeout(() => {
-      const savedToken = secureTokenService.getRefreshToken();
-      console.log("Cookie refreshToken criado:", !!savedToken);
-    }, 100);
   },
 
   // Obter access token do cookie

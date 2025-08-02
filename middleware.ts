@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 // Rotas que precisam de autenticação
 const protectedRoutes = [
-  "/admin",
+  "/admin/",
   "/dashboard",
   "/profile",
   "/orders",

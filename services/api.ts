@@ -146,11 +146,23 @@ export const authService = {
       // Verificar se a resposta tem a estrutura esperada
       if (response.data && response.data.token) {
         // Se a API retorna diretamente o token (sem wrapper)
+        if (!response.data.user) {
+          console.error(
+            "Resposta da API não contém dados do usuário:",
+            response.data
+          );
+          return {
+            success: false,
+            message: "Resposta da API inválida: dados do usuário ausentes",
+            data: {} as AuthResponse,
+          };
+        }
+
         const authData = {
           token: response.data.token,
           refreshToken: response.data.refreshToken,
           expiresIn: response.data.expiresIn,
-          user: response.data.user || { id: "user", email: credentials.email },
+          user: response.data.user,
         };
 
         console.log("Dados de autenticação processados:", authData);
@@ -174,9 +186,11 @@ export const authService = {
           data: {} as AuthResponse,
         };
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Erro no login:", error);
-      console.error("Resposta de erro:", error.response?.data);
+      if (error && typeof error === "object" && "response" in error) {
+        console.error("Resposta de erro:", (error as any).response?.data);
+      }
       throw error;
     }
   },
@@ -191,11 +205,23 @@ export const authService = {
 
       // Verificar se a resposta tem a estrutura esperada
       if (response.data && response.data.token) {
+        if (!response.data.user) {
+          console.error(
+            "Resposta da API não contém dados do usuário:",
+            response.data
+          );
+          return {
+            success: false,
+            message: "Resposta da API inválida: dados do usuário ausentes",
+            data: {} as AuthResponse,
+          };
+        }
+
         const authData = {
           token: response.data.token,
           refreshToken: response.data.refreshToken,
           expiresIn: response.data.expiresIn,
-          user: response.data.user || { id: "user", email: userData.email },
+          user: response.data.user,
         };
 
         tokenService.setTokens(authData);
@@ -215,7 +241,7 @@ export const authService = {
           data: {} as AuthResponse,
         };
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Erro no registro:", error);
       throw error;
     }
