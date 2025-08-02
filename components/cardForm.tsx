@@ -45,11 +45,15 @@ export default function CardForm({
     }
 
     if (isRegister) {
-      // Se for registro, chama onRegisterSuccess para ir para AddressForm
-      onRegisterSuccess?.({ ...formData });
+      onRegisterSuccess?.({
+        email: formData.email,
+        password: formData.password,
+      });
     } else {
-      // Se for login, chama onSubmit para ir direto para a API
-      onSubmit({ ...formData });
+      onSubmit({
+        email: formData.email,
+        password: formData.password,
+      });
     }
   };
 
